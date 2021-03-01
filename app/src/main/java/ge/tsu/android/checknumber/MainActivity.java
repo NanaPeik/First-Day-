@@ -2,14 +2,12 @@ package ge.tsu.android.checknumber;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-
 import java.util.Random;
 
+import ge.tsu.android.checknumber.databinding.ActivityMainBinding;
 import ge.tsu.android.checknumber.databinding.FragmentBlankBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,12 +17,12 @@ public class MainActivity extends AppCompatActivity {
         return random.nextInt(100);
     }
     public int previousNumber;
-    private FragmentBlankBinding binding;
+    private ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding=FragmentBlankBinding.inflate(getLayoutInflater());
+        binding=ActivityMainBinding.inflate(getLayoutInflater());
         View view=binding.getRoot();
         setContentView(view);
 
@@ -45,6 +43,13 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     binding.highLow.setText("Too Low");
                 }
+            }
+        });
+        binding.changeActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,BlankFragment.class);
+                startActivity(intent);
             }
         });
     }
